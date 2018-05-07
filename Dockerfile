@@ -5,6 +5,15 @@ MAINTAINER Leon
 RUN echo "deb mirror://mirrorlist.gerritforge.com/deb gerrit contrib" > /etc/apt/sources.list.d/GerritForge.list
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1871F775
 
+RUN mkdir -p /home/gerrit/.ssh
+RUN chown -R gerrit: /home/gerrit/.ssh
+RUN adduser gerrit sudo
+RUN echo -n 'gerrit:gerrit' | chpasswd
+# Enable passwordless sudo for users under the "sudo" group 
+RUN sed -i.bkp -e \
+      's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
+      /etc/sudoers
+
 # Allow remote connectivity and sudo
 RUN apt-get update
 RUN apt-key update
@@ -14,15 +23,6 @@ RUN apt-get -y install openssh-client sudo
 # (pre-trans Gerrit script needs to have access to the Java command)
 RUN apt-get -y install openjdk-8-jdk
 RUN apt-get -y install gerrit=2.15.1-1 && rm -f /var/gerrit/logs/*
-
-RUN mkdir -p /home/gerrit/.ssh
-RUN chown -R gerrit: /home/gerrit/.ssh
-RUN adduser gerrit sudo
-RUN echo -n 'gerrit:gerrit' | chpasswd
-# Enable passwordless sudo for users under the "sudo" group 
-RUN sed -i.bkp -e \
-      's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' \
-      /etc/sudoers
 
 USER gerrit
 RUN java -jar /var/gerrit/bin/gerrit.war init --batch --install-all-plugins -d /var/gerrit
