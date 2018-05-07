@@ -1,8 +1,9 @@
 #!/bin/bash
 file="~/.ssh/id_rsa"
 if [ ! -f "$file" ]; then
-	mkdir -p ~/.ssh 
-	ssh-keygen -q -t rsa -N 'gerrit' -f ~/.ssh/id_rsa
+	sudo mkdir -p ~/.ssh 
+	sudo ssh-keygen -q -t rsa -N 'gerrit' -f ~/.ssh/id_rsa
+	sudo chown gerrit: -R ~/.ssh
 fi
 echo "====================================ssh Public key======================================================"
 cat ~/.ssh/id_rsa.pub
