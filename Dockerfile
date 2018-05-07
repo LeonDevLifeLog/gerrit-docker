@@ -8,7 +8,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 1871F775
 # Allow remote connectivity and sudo
 RUN apt-get update
 RUN apt-key update
-RUN apt-get -y install openssh-client sudo
+RUN apt-get -y install openssh-client sudo vim
 
 # Install OpenJDK and Gerrit in two subsequent transactions
 # (pre-trans Gerrit script needs to have access to the Java command)
