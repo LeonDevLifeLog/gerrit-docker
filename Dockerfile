@@ -36,6 +36,6 @@ ENV CANONICAL_WEB_URL=
 EXPOSE 29418 8080
 
 VOLUME ["/var/gerrit/.ssh","/var/gerrit/git", "/var/gerrit/index", "/var/gerrit/cache", "/var/gerrit/db", "/var/gerrit/etc"]
-
+ADD run.sh /var/gerrit/run.sh
 # Start Gerrit
-CMD bash run.sh
+CMD bash /var/gerrit/run.sh
