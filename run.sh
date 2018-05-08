@@ -1,7 +1,8 @@
 #!/bin/bash
 if [[ ! -e ~/.ssh/id_rsa ]] ; then
-	mkdir -p ~/.ssh 
-	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
+	sudo mkdir -p /var/gerrit/.ssh 
+	sudo ssh-keygen -q -t rsa -N '' -f /var/gerrit/.ssh/id_rsa
+	sudo chown gerrit:gerrit -R /var/gerrit/.ssh
 fi
 echo "====================================SSH Public Key======================================================"
 cat ~/.ssh/id_rsa.pub
