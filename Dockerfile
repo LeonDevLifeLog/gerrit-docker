@@ -33,7 +33,7 @@ RUN java -jar /var/gerrit/bin/gerrit.war reindex -d /var/gerrit
 ENV CANONICAL_WEB_URL=
 
 # Allow incoming traffic
-EXPOSE 29418 8080
+EXPOSE 29418 80
 
 VOLUME ["/var/gerrit/.ssh","/var/gerrit/git", "/var/gerrit/index", "/var/gerrit/cache", "/var/gerrit/db", "/var/gerrit/etc"]
 ADD run.sh /var/gerrit/run.sh
