@@ -1,12 +1,12 @@
 #!/bin/bash
 file="~/.ssh/id_rsa"
-if [[ ! -f "$file" ]]; then
+if [[ ! -e "$file" ]]; then
 	mkdir -p ~/.ssh 
 	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
 fi
-echo "====================================ssh Public key======================================================"
+echo "====================================SSH Public Key======================================================"
 cat ~/.ssh/id_rsa.pub
-echo "====================================ssh Public key======================================================"
+echo "====================================SSH Public Key======================================================"
 eval $(ssh-agent -s)
 echo -n '' | ssh-add
 ssh-keyscan -t rsa -p 10022 git.xyz.cn > ~/.ssh/known_hosts
