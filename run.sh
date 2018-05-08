@@ -1,6 +1,5 @@
 #!/bin/bash
-file="~/.ssh/id_rsa"
-if [[ ! -e "$file" ]]; then
+if [[ ! -e ~/.ssh/id_rsa ]] ; then
 	mkdir -p ~/.ssh 
 	ssh-keygen -q -t rsa -N '' -f ~/.ssh/id_rsa
 fi
