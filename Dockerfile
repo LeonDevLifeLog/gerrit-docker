@@ -27,7 +27,7 @@ RUN sed -i.bkp -e \
 
 
 USER gerrit
-RUN mkdir /var/gerrit/plugins && \
+RUN mkdir -p /var/gerrit/plugins && \
     wget -O /var/gerrit/plugins/reviewers.jar https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.15/job/plugin-reviewers-bazel-stable-2.15/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/reviewers/reviewers.jar && \
     wget -O /var/gerrit/plugins/avatars_external.jar https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.15/job/plugin-avatars-external-bazel-master-stable-2.15/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/avatars-external/avatars-external.jar 
 
