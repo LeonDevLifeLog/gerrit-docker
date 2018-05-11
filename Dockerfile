@@ -27,7 +27,9 @@ RUN sed -i.bkp -e \
 
 
 USER gerrit
-RUN java -jar /var/gerrit/bin/gerrit.war init --batch --install-all-plugins -d /var/gerrit
+ADD https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.15/job/plugin-reviewers-bazel-stable-2.15/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/reviewers/reviewers.jar /var/gerrit/plugins/reviewers.jar
+ADD https://gerrit-ci.gerritforge.com/view/Plugins-stable-2.15/job/plugin-avatars-external-bazel-master-stable-2.15/lastSuccessfulBuild/artifact/bazel-genfiles/plugins/avatars-external/avatars-external.jar /var/gerrit/plugins/avatars-external.jar
+RUN java -jar /var/gerrit/bin/gerrit.war init --batch --install-all-plugins -d /var/gerrit --install-all-plugins
 RUN java -jar /var/gerrit/bin/gerrit.war reindex -d /var/gerrit
 
 ENV CANONICAL_WEB_URL=
